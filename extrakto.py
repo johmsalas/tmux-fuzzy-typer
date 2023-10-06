@@ -26,15 +26,15 @@ RE_WORD = "[^][(){}=$\u2500-\u27BF\uE000-\uF8FF \\t\\n\\r]+"
 class Extrakto:
     def __init__(self, *, min_length=5, alt=False, prefix_name=False):
         conf = ConfigParser(interpolation=None)
-        default_conf = os.path.join(SCRIPT_DIR, "extrakto.conf")
+        default_conf = os.path.join(SCRIPT_DIR, "fuzzy-typer.conf")
         user_conf = os.path.join(
-            os.path.expanduser("~/.config"), "extrakto/extrakto.conf"
+            os.path.expanduser("~/.config"), "extrakto/fuzzy-typer.conf"
         )
 
         conf.read([default_conf, user_conf])
         sections = conf.sections()
         if not "path" in sections or not "url" in sections:
-            raise Exception("extrakto.conf incomplete")
+            raise Exception("fuzzy-typer.conf incomplete")
 
         self.min_length = min_length
         self.alt = alt
@@ -179,7 +179,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--all",
         action="store_true",
-        help="extract using all filters defined in extrakto.conf",
+        help="extract using all filters defined in fuzzy-typer.conf",
     )
 
     parser.add_argument(
